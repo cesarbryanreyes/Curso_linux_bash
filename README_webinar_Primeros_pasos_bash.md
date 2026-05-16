@@ -1,4 +1,4 @@
-# 🧬 Webinar CEM-BIO-101: Primeros pasos en bioinformática con Linux y Bash
+# 🧬 Webinar: Primeros pasos en bioinformática con Linux y Bash
 
 > Repositorio público de referencia del webinar gratuito del **sábado 16 de mayo de 2026** organizado por el **Centro de Especialización Multidisciplinario (CEM)**.
 
