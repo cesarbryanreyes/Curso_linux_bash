@@ -80,7 +80,7 @@ echo "$(($(cat SRR2589044_1.trim.sub.fastq | wc -l) / 4))"
 Total: 1108029
 ```
 
-**Explicación:**  `cat` lee el archivo y lo envía por el pipe `|` a  `wc -l` que cuenta el número total de líneas. Dividir entre 4 da el número de lecturas (porque cada lectura ocupa 4 líneas). `$( ... )` ejecuta un comando y captura su salida, mientras que `$(( ... ))` hace la operación matemática en Bash. Finalmente, `echo` imprime el resultado. **Un millón ciento ocho mil veintinueve secuencias en menos de 5 segundos.**
+**Explicación:**  `cat` lee el archivo y lo envía por el pipe `|` a  `wc -l` que cuenta el número total de líneas. Dividir entre 4 da el número de lecturas (porque cada lectura ocupa 4 líneas). `$( ... )` ejecuta un comando y captura su salida, mientras que `$(( ... ))` hace la operación matemática en Bash. Finalmente, `echo` imprime el resultado. **Ciento setenta y cinco mil reads (secuencias) en menos de 5 segundos.** 
 
 ---
 
