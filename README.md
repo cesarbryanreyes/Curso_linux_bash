@@ -284,7 +284,7 @@ KNQLTFNQIALEEAGRYAAEDADVTLQLHLKMWPDLQKHKGPLNVFENIEMPLVPVLSRI
 - `/^>/` — ¿esta línea empieza con `>`? Si sí, **apaga** el flag (`p=0`): significa que llegamos a una proteína que no nos interesa, deja de imprimir.
 - `/DPO1_ECOLI/` — ¿esta línea contiene `DPO1_ECOLI`? Si sí, **enciende** el flag (`p=1`): encontramos la proteína buscada, empieza a imprimir.
 - `p` — ¿el flag está encendido? Si sí, **imprime** la línea actual.
-- `>` redirige la salida a un archivo nuevo (`DPO1_ECOLI_protein.fasta`) listo para usar en análisis posteriores como alineamientos, docking molecular o diseño de primers.
+- En el caso de guardar el resultado en archivo, `>` redirige la salida a un archivo nuevo (`DPO1_ECOLI_protein.fasta`) listo para usar en análisis posteriores como alineamientos, docking molecular o diseño de primers.
 
 De esta forma extrae el header y toda la secuencia de aminoácidos hasta encontrar el siguiente `>`, momento en que el flag se apaga automáticamente. Es como buscar un capítulo en un libro: ignoras todo hasta encontrar el título que buscas, lees hasta el siguiente título, y paras.
 
