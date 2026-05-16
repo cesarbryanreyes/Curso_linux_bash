@@ -2,7 +2,7 @@
 
 > Repositorio público de referencia del webinar gratuito del **sábado 16 de mayo de 2026** organizado por el **Centro de Especialización Multidisciplinario (CEM)**.
 
-**Fecha del webinar:** sábado 16 de mayo de 2026 · 5:00 PM (hora de Lima)
+**Fecha del webinar:** sábado 16 de mayo de 2026 · 5:00 PM (hora de Lima, Peru)
 **Plataforma:** Microsoft Teams
 **Docente:** Mg(c). César Bryan Reyes Moreno · [UNMSM](https://www.unmsm.edu.pe/)
 **ORCID:** [0000-0001-7346-2917](https://orcid.org/0000-0001-7346-2917)
