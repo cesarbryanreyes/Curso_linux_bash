@@ -77,7 +77,7 @@ echo "$(($(cat SRR2589044_1.trim.sub.fastq | wc -l) / 4))"
 **Salida esperada:**
 
 ```
-Total: 1108029
+175000
 ```
 
 **Explicación:**  `cat` lee el archivo y lo envía por el pipe `|` a  `wc -l` que cuenta el número total de líneas. Dividir entre 4 da el número de lecturas (porque cada lectura ocupa 4 líneas). `$( ... )` ejecuta un comando y captura su salida, mientras que `$(( ... ))` hace la operación matemática en Bash. Finalmente, `echo` imprime el resultado. **Ciento setenta y cinco mil reads (secuencias) en menos de 5 segundos.** 
@@ -145,14 +145,12 @@ grep -c "ATGGAATTCTCGGGTGCCAAGG" solo_secuencias_ejemplo2.txt
 ```
 
 **Explicación:**
-- **Paso 1:** `cat` lee el archivo y lo envía a `awk`, que con `NR%4==2` extrae únicamente las líneas de secuencia y las guarda en `solo_secuencias.txt`.
-- **Paso 2:** `grep` busca la cadena `AGATCGGAAGAG` dentro de cada línea de `solo_secuencias.txt`. `AGATCGGAAGAG` es la secuencia de inicio del adaptador estándar de Illumina. El flag `-c` en lugar de imprimir las líneas que coinciden, cuenta cuántas lecturas la contienen — detectando así contaminación de adaptador que debe ser removida antes del análisis (~16% de las lecturas en este caso).
+- **Paso 1:** `cat` lee el archivo y lo envía a `awk`, que con `NR%4==2` extrae únicamente las líneas de secuencia y las guarda en un archivo de salida (`solo_secuencias.txt` o `solo_secuencias_ejemplo2.txt` según el ejemplo).
+- **Paso 2:** `grep -c` busca y cuenta cuántas lecturas contienen cada secuencia de adaptador. `AGATCGGAAGAG` es la secuencia de inicio del adaptador estándar TruSeq de Illumina — el más frecuente en experimentos de DNA-seq y RNA-seq. El flag `-c` en lugar de imprimir las líneas que coinciden, cuenta cuántas lecturas la contienen, detectando así contaminación de adaptador que debe ser removida antes del análisis. Los adaptadores **no dependen del tipo de experimento** (DNA-seq, RNA-seq, ChIP-seq) sino del **kit de Illumina** utilizado para preparar la librería.
+- **Resultado:** el Ejemplo 1 da `0` porque el archivo ya fue pre-procesado; el Ejemplo 2 da `27` de 6,220,424 reads (~0.00043%), lo que indica un archivo prácticamente limpio.
 
-**Explicación:**
-- **Paso 1:** `cat` lee el archivo y lo envía a `awk`, que con `NR%4==2` extrae únicamente las líneas de secuencia y las guarda en `solo_secuencias_ejemplo2.txt`.
-- **Paso 2:** `grep -c` busca y cuenta lecturas que contienen cada adaptador. Los adaptadores **no dependen del tipo de experimento** (DNA-seq, RNA-seq, ChIP-seq) sino del **kit de Illumina** utilizado para preparar la librería. El adaptador TruSeq `AGATCGGAAGAG` es uno de los más frecuentes en experimentos.
+> **Esto es exactamente lo que detecta FastQC** automáticamente — la herramienta que aprenderás en el Curso. Luego **Trimmomatic** o **Cutadapt** se encargan de eliminarlos antes del análisis.
 
-> **Esto es exactamente lo que detecta FastQC**, la herramienta que aprenderás en el Curso.
 ---
 
 ## CASO II: Proteoma anotado (MULTIFASTA)
@@ -286,10 +284,11 @@ KNQLTFNQIALEEAGRYAAEDADVTLQLHLKMWPDLQKHKGPLNVFENIEMPLVPVLSRI
 - `/^>/` — ¿esta línea empieza con `>`? Si sí, **apaga** el flag (`p=0`): significa que llegamos a una proteína que no nos interesa, deja de imprimir.
 - `/DPO1_ECOLI/` — ¿esta línea contiene `DPO1_ECOLI`? Si sí, **enciende** el flag (`p=1`): encontramos la proteína buscada, empieza a imprimir.
 - `p` — ¿el flag está encendido? Si sí, **imprime** la línea actual.
+- `>` redirige la salida a un archivo nuevo (`DPO1_ECOLI_protein.fasta`) listo para usar en análisis posteriores como alineamientos, docking molecular o diseño de primers.
 
 De esta forma extrae el header y toda la secuencia de aminoácidos hasta encontrar el siguiente `>`, momento en que el flag se apaga automáticamente. Es como buscar un capítulo en un libro: ignoras todo hasta encontrar el título que buscas, lees hasta el siguiente título, y paras.
 
-- El símbolo `>` redirige la salida a un archivo nuevo (`DPO1_ECOLI_protein.fasta`) listo para usar en análisis posteriores como alineamientos, docking molecular o diseño de primers.
+
 
 ---
 
