@@ -11,7 +11,7 @@
 
 ## ¿Qué encontrarás aquí?
 
-Este repositorio contiene los **10 comandos completos** del demo en vivo del webinar, listos para que los repliques en tu propia computadora. Incluye instrucciones de instalación, descarga de datos y los comandos paso a paso.
+Este repositorio contiene los **comandos esenciales** del demo en vivo del webinar, listos para que los repliques en tu propia computadora. 
 
 > **Importante:** este repositorio NO es un curso. Es una guía de referencia rápida del demo del webinar. Si quieres aprender los fundamentos desde cero, inscríbete al curso completo **Fundamentos de Linux y Bash Scripting para Bioinformática** (inicio: 13 de junio de 2026).
 
