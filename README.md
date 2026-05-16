@@ -140,32 +140,39 @@ grep -c "ATGGAATTCTCGGGTGCCAAGG" solo_secuencias_ejemplo2.txt
 
 **Salida esperada:**
 ```
-0 para ejemplo 1 
-27 para ejemplo 2
+0 para ejemplo 1 en TruSeq R1
+27 para ejemplo 2 en TruSeq R1
 ```
 
 **Explicación:**
 - **Paso 1:** `cat` lee el archivo y lo envía a `awk`, que con `NR%4==2` extrae únicamente las líneas de secuencia y las guarda en `solo_secuencias.txt`.
 - **Paso 2:** `grep` busca la cadena `AGATCGGAAGAG` dentro de cada línea de `solo_secuencias.txt`. `AGATCGGAAGAG` es la secuencia de inicio del adaptador estándar de Illumina. El flag `-c` en lugar de imprimir las líneas que coinciden, cuenta cuántas lecturas la contienen — detectando así contaminación de adaptador que debe ser removida antes del análisis (~16% de las lecturas en este caso).
 
+**Explicación:**
+- **Paso 1:** `cat` lee el archivo y lo envía a `awk`, que con `NR%4==2` extrae únicamente las líneas de secuencia y las guarda en `solo_secuencias_ejemplo2.txt`.
+- **Paso 2:** `grep -c` busca y cuenta lecturas que contienen cada adaptador. Los adaptadores **no dependen del tipo de experimento** (DNA-seq, RNA-seq, ChIP-seq) sino del **kit de Illumina** utilizado para preparar la librería. El adaptador TruSeq `AGATCGGAAGAG` es uno de los más frecuentes en experimentos.
+
 > **Esto es exactamente lo que detecta FastQC**, la herramienta que aprenderás en el Curso.
 ---
 
-## 📦 CASO II: Proteoma anotado (MULTIFASTA)
+## CASO II: Proteoma anotado (MULTIFASTA)
+
+### Ubicarse en el directorio de trabajo Cursos_bioinformatica
+```bash
+cd ~/Cursos_bioinformatica/
+```
 
 ### Descarga del archivo
 
 ```bash
-mkdir -p ~/webinar_demo/data/proteome
-cd ~/webinar_demo/data/proteome
+mkdir -p webinar_linux_bash/data/proteome
+cd webinar_linux_bash/data/proteome
 wget -O ecoli_proteome.fasta.gz "https://rest.uniprot.org/uniprotkb/stream?query=organism_id:83333+AND+reviewed:true&format=fasta&compressed=true"
 gunzip ecoli_proteome.fasta.gz
-ls -lh ecoli_proteome.fasta
+ls -lh
 ```
 
-**Resultado esperado:** archivo `ecoli_proteome.fasta` de ~5 MB con aproximadamente 4,400 proteínas anotadas de *E. coli* K-12.
-
-**Origen:** Proteoma de referencia de *Escherichia coli* descargado de UniProt.
+**Resultado esperado:** archivo `ecoli_proteome.fasta` de ~5 MB con aproximadamente 4,400 proteínas anotadas de *E. coli* K-12 descargado de UniProt.
 
 ---
 
@@ -199,14 +206,14 @@ grep -c "^>" ecoli_proteome.fasta
 **Salida esperada:**
 
 ```
-4391
+4531
 ```
 
 **Explicación:** `^>` es una expresión regular que significa "líneas que empiezan con `>`". Como cada proteína FASTA empieza con `>`, contar esas líneas equivale a contar proteínas. **4,391 proteínas anotadas en menos de 1 segundo.**
 
 ---
 
-### COMANDO 3 — Buscar TODAS las proteínas ribosomales (⭐ CLÍMAX 1)
+### COMANDO 3 — Buscar TODAS las proteínas ribosomales
 
 ```bash
 grep -c "ribosomal" ecoli_proteome.fasta
@@ -222,7 +229,7 @@ grep -c "ribosomal" ecoli_proteome.fasta
 
 ---
 
-### COMANDO 4 — Buscar genes específicos por nombre (🟡 OPCIONAL)
+### COMANDO 4 — Buscar genes específicos por nombre
 
 ```bash
 grep ">" ecoli_proteome.fasta | grep -i "DNA polymerase"
@@ -231,34 +238,43 @@ grep ">" ecoli_proteome.fasta | grep -i "DNA polymerase"
 **Salida esperada:**
 
 ```
->sp|P00582|DPO1_ECOLI DNA polymerase I OS=Escherichia coli (strain K12)...
->sp|P00580|DPO3A_ECOLI DNA polymerase III subunit alpha OS=Escherichia coli...
->sp|P03007|DPO3E_ECOLI DNA polymerase III subunit epsilon OS=Escherichia coli...
->sp|P06710|DPO3X_ECOLI DNA polymerase III subunit tau OS=Escherichia coli...
->sp|P10443|DPO3B_ECOLI DNA polymerase III subunit beta OS=Escherichia coli...
-...
+>sp|P00582|DPO1_ECOLI DNA polymerase I OS=Escherichia coli (strain K12) OX=83333 GN=polA PE=1 SV=1
+>sp|P03007|DPO3E_ECOLI DNA polymerase III subunit epsilon OS=Escherichia coli (strain K12) OX=83333 GN=dnaQ PE=1 SV=1
+>sp|P06710|DPO3X_ECOLI DNA polymerase III subunit tau OS=Escherichia coli (strain K12) OX=83333 GN=dnaX PE=1 SV=1
+>sp|P0ABS8|HOLE_ECOLI DNA polymerase III subunit theta OS=Escherichia coli (strain K12) OX=83333 GN=holE PE=1 SV=1
+>sp|P10443|DPO3A_ECOLI DNA polymerase III subunit alpha OS=Escherichia coli (strain K12) OX=83333 GN=dnaE PE=1 SV=1
+>sp|P28630|HOLA_ECOLI DNA polymerase III subunit delta OS=Escherichia coli (strain K12) OX=83333 GN=holA PE=1 SV=1
+>sp|P28631|HOLB_ECOLI DNA polymerase III subunit delta' OS=Escherichia coli (strain K12) OX=83333 GN=holB PE=1 SV=2
+>sp|P28632|HOLD_ECOLI DNA polymerase III subunit psi OS=Escherichia coli (strain K12) OX=83333 GN=holD PE=1 SV=1
+>sp|P28905|HOLC_ECOLI DNA polymerase III subunit chi OS=Escherichia coli (strain K12) OX=83333 GN=holC PE=1 SV=1
+>sp|Q47155|DPO4_ECOLI DNA polymerase IV OS=Escherichia coli (strain K12) OX=83333 GN=dinB PE=1 SV=1
+>sp|P21189|DPO2_ECOLI DNA polymerase II OS=Escherichia coli (strain K12) OX=83333 GN=polB PE=1 SV=2
 ```
 
 **Explicación:** Primer `grep ">"` filtra solo los headers (líneas que contienen `>`). Segundo `grep -i "DNA polymerase"` busca el término sin distinguir mayúsculas/minúsculas. Útil para identificar genes de interés en bases de datos.
 
 ---
 
-### COMANDO 5 — Extraer la secuencia COMPLETA de UNA proteína específica (⭐ CLÍMAX FINAL)
+### COMANDO 5 — Extraer la secuencia COMPLETA de UNA proteína específica y guardar la secuencia extraida
 
 ```bash
 awk '/^>/{p=0} /DPO1_ECOLI/{p=1} p' ecoli_proteome.fasta | head -10
+awk '/^>/{p=0} /DPO1_ECOLI/{p=1} p' ecoli_proteome.fasta > DPO1_ECOLI_protein.fasta
 ```
 
 **Salida esperada:**
 
 ```
->sp|P00582|DPO1_ECOLI DNA polymerase I OS=Escherichia coli (strain K12)...
-MVQIPQNPLILVDGSSYLYRAYHAFPPLTNSAGEPTGAMYGVLNMLRSLIMQYKPTHAACV
-FDAKGKTFRDELFEHYKSHRPPMPDDLRAQIEPLHAMVKAMGLPLLAVSGVEADDVIGTLA
-REAEKAGRPVLISTGDKDMAQLVTPNITLINTMTNTILGPEEVVNKYGVPPELIIDFLALM
-GDSSDNIPGVPGVGEKTAQALLQGLGGLDTLYAEPEKIAGLSFRGAKTMAAKLEQNKEVAY
-LSYQLATIKTDVELELTCEQLEVQQPAAEELLGLFKKYEFKRWTADVEAGKWLQAKGAKPA
-...
+>sp|P00582|DPO1_ECOLI DNA polymerase I OS=Escherichia coli (strain K12) OX=83333 GN=polA PE=1 SV=1
+MVQIPQNPLILVDGSSYLYRAYHAFPPLTNSAGEPTGAMYGVLNMLRSLIMQYKPTHAAV
+VFDAKGKTFRDELFEHYKSHRPPMPDDLRAQIEPLHAMVKAMGLPLLAVSGVEADDVIGT
+LAREAEKAGRPVLISTGDKDMAQLVTPNITLINTMTNTILGPEEVVNKYGVPPELIIDFL
+ALMGDSSDNIPGVPGVGEKTAQALLQGLGGLDTLYAEPEKIAGLSFRGAKTMAAKLEQNK
+EVAYLSYQLATIKTDVELELTCEQLEVQQPAAEELLGLFKKYEFKRWTADVEAGKWLQAK
+GAKPAAKPQETSVADEAPEVTATVISYDNYVTILDEETLKAWIAKLEKAPVFAFDTETDS
+LDNISANLVGLSFAIEPGVAAYIPVAHDYLDAPDQISRERALELLKPLLEDEKALKVGQN
+LKYDRGILANYGIELRGIAFDTMLESYILNSVAGRHDMDSLAERWLKHKTITFEEIAGKG
+KNQLTFNQIALEEAGRYAAEDADVTLQLHLKMWPDLQKHKGPLNVFENIEMPLVPVLSRI
 ```
 
 **Explicación:** El comando `awk` usa una variable `p` (flag) que activa la impresión solo cuando encuentra el patrón deseado. Cuando llega a un nuevo header (`/^>/`), apaga el flag (`p=0`). Cuando encuentra el header de la proteína buscada (`DPO1_ECOLI`), lo enciende (`p=1`). Mientras el flag esté encendido, imprime las líneas.
@@ -267,10 +283,10 @@ LSYQLATIKTDVELELTCEQLEVQQPAAEELLGLFKKYEFKRWTADVEAGKWLQAKGAKPA
 
 ---
 
-### COMANDO 6 (BONUS) — Extraer UN GRUPO de proteínas
+### COMANDO 6 — Extraer UN GRUPO de proteínas
 
 ```bash
-awk '/^>/{flag=0} /DNA polymerase/{flag=1} flag' ecoli_proteome.fasta > polimerasas.fasta
+awk '/^>/{p=0} /DNA polymerase/{p=1} p' ecoli_proteome.fasta > polimerasas.fasta
 grep -c "^>" polimerasas.fasta
 ```
 
@@ -286,68 +302,47 @@ grep -c "^>" polimerasas.fasta
 
 ---
 
-## 🎓 ¿Quieres aprender los fundamentos completos?
+## ¿Quieres aprender los fundamentos completos?
 
 Inscríbete al curso oficial:
 
-### CEM-BIO-101 — Fundamentos de Linux y Bash Scripting para Bioinformática
+### Fundamentos de Linux y Bash Scripting para Bioinformática
 
 | Característica | Detalle |
 |----------------|---------|
-| 📅 **Inicio** | 13 de junio de 2026 |
-| 📅 **Cierre** | 4 de julio de 2026 |
-| ⏱️ **Duración** | 11 horas lectivas en 4 semanas |
-| 🌐 **Modalidad** | Virtual híbrida (7 h asincrónicas + 4 h sincrónicas) |
-| 🗣️ **Idioma** | Español |
-| 🎓 **Nivel** | Introductorio (sin prerrequisitos) |
-| 📜 **Certificación** | Digital del CEM al aprobar con nota ≥ 13/20 |
+| **Inicio** | 13 de junio de 2026 |
+| **Cierre** | 4 de julio de 2026 |
+| **Duración** | 11 horas lectivas en 4 semanas |
+| **Modalidad** | Virtual híbrida (7 h asincrónicas + 4 h sincrónicas) |
+| **Idioma** | Español |
+| **Nivel** | Introductorio (sin prerrequisitos) |
+| **Certificación** | Digital del CEM |
 
 ### Estructura del curso (5 módulos)
 
 - **M0** — Bienvenida y preparación del flujo de trabajo (1 h)
 - **M1** — Fundamentos de Linux, la terminal y el sistema de archivos (2.5 h)
-- **M2** — Procesamiento de datos biológicos en texto (2.5 h) ← *donde profundizarás en lo que viste hoy*
+- **M2** — Procesamiento de datos biológicos en texto (2.5 h)
 - **M3** — Bash scripting introductorio: de comandos a programas (2.5 h)
-- **M4** — Aplicación: control de calidad de FASTQ con FastQC (2.5 h) ← *automatización del CASO I*
+- **M4** — Aplicación: control de calidad de FASTQ con FastQC (2.5 h)
 
 ### ¿Por qué este curso?
 
-- 🎯 **100% en español** con datasets bioinformáticos reales
-- 👥 **Cohorte pequeña** con seguimiento personalizado del docente
-- 💻 **Datos reales** descargados de NCBI, Ensembl, UniProt y SRA/ENA
-- 📚 **Bitácora personal en GitHub** — construirás tu propia guía de referencia futura
-- 🚀 **Diseño introductorio honesto** — 2-3 h por semana, sin sobrecargas
+- **100% en español** con datasets bioinformáticos reales
+- **Cohorte pequeña** con seguimiento personalizado del docente
+- **Datos reales** descargados de NCBI, Ensembl, UniProt y SRA/ENA
+- **Bitácora personal en GitHub** — construirás tu propia guía de referencia futura
+- **Diseño introductorio honesto** — 2-3 h por semana, sin sobrecargas
 
 ---
 
-## 📞 Contacto e inscripción
+## Contacto e inscripción
 
 - **Inscripción al curso:** escanea el QR del flyer del CEM o escribe a 📧 cursoscemcontacto@gmail.com
-- **Docente:** cesar.reyes11@unmsm.edu.pe
-- **ORCID del docente:** [0000-0001-7346-2917](https://orcid.org/0000-0001-7346-2917)
 
 ---
 
-## 📜 Créditos y referencias
-
-### Datos utilizados
-
-- **FASTQ (CASO I):** subset de `SRR2589044` del experimento de evolución a largo plazo de *E. coli* de Richard Lenski. Distribuido por [Data Carpentry — Wrangling Genomics](https://datacarpentry.org/wrangling-genomics/).
-- **Multifasta (CASO II):** Proteoma de referencia de *Escherichia coli* K-12, descargado de [UniProt](https://www.uniprot.org/).
-
-### Material adaptado
-
-El curso CEM-BIO-101 está adaptado a partir del material del **Máster en Bioinformática de la Universidad Internacional de Valencia (VIU, España)**.
-
-### Lecturas recomendadas
-
-- Perkel, J. M. (2021). [Five reasons why researchers should learn to love the command line](https://www.nature.com/articles/d41586-021-00263-0). *Nature*, 590(7844), 173–174.
-- Brandies, P. A., & Hogg, C. J. (2021). [Ten simple rules for getting started with command-line bioinformatics](https://doi.org/10.1371/journal.pcbi.1008645). *PLoS Computational Biology*, 17(2), e1008645.
-- Noble, W. S. (2009). [A quick guide to organizing computational biology projects](https://doi.org/10.1371/journal.pcbi.1000424). *PLoS Computational Biology*, 5(7), e1000424.
-
----
-
-## 📝 Licencia
+## Licencia
 
 Este repositorio se distribuye con fines educativos. Los comandos y ejemplos pueden reutilizarse libremente. Los datos provienen de fuentes públicas (Data Carpentry, UniProt) con sus respectivas licencias.
 
