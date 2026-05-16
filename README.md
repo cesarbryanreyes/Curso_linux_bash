@@ -17,7 +17,7 @@ Este repositorio contiene los **comandos esenciales** del demo en vivo del webin
 
 ---
 
-## 🛠️ Antes de empezar: requisitos técnicos
+## Antes de empezar: requisitos técnicos
 
 ### Sistema operativo
 - **Windows 10/11:** instalar [WSL2 con Ubuntu]
@@ -64,11 +64,11 @@ AGCCAATGCAGTTTGCTGTACATCGCCATCCAGCAACCTGTGGGCGT...
 AAFFFKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK...
 ```
 
-**Explicación:** `zcat` lee archivos comprimidos al vuelo (sin descomprimirlos). `head -8` toma solo las primeras 8 líneas. El símbolo `|` (pipe) conecta los dos comandos como una tubería. Cada lectura FASTQ ocupa **4 líneas**: identificador, secuencia, separador (`+`) y calidades.
+**Explicación:** `head -8` toma solo las primeras 8 líneas. Cada lectura FASTQ ocupa **4 líneas**: identificador, secuencia, separador (`+`) y calidades (codificacion Phred+33 / ASCII).
 
 ---
 
-### COMANDO 2 — Contar lecturas (⭐ CLÍMAX 1)
+### COMANDO 2 — Contar lecturas
 
 ```bash
 echo "Total: $(($(zcat sub_SRR2589044_1.fastq.gz | wc -l) / 4))"
