@@ -183,7 +183,6 @@ head -10 ecoli_proteome.fasta
 ```
 
 **Salida esperada (parcial):**
-
 ```
 >sp|P0A6F3|GLPK_ECOLI Glycerol kinase OS=Escherichia coli (strain K12) OX=83333 GN=glpK PE=1 SV=3
 MTEKKYIVALDQGTTSSRAVVMDHDANIISVSQREFEQIYPKPGWVEHDPMEIWATQSSTL
@@ -193,7 +192,9 @@ YTNASRTMLFNIHTLDWDDKMLEVLDIPREMLPEVRRSSEVYGQTNIGGKGGTRIPISGIA
 ...
 ```
 
-**Explicación:** Cada proteína FASTA empieza con `>` seguido del **header anotado**: ID de UniProt, nombre del gen, nombre completo de la proteína y organismo. Las siguientes líneas son la secuencia de aminoácidos.
+**Explicación:** `head -10` muestra las primeras 10 líneas del archivo sin abrirlo completo — útil cuando el archivo tiene miles de proteínas. Cada proteína en formato FASTA tiene una estructura fija de dos partes:
+- **Header (`>`):** contiene el ID de UniProt, el código del gen, el nombre completo de la proteína y el organismo de origen.
+- **Secuencia:** las líneas siguientes contienen los aminoácidos en código de una letra (A, M, K, T...) hasta que aparece el siguiente `>`.
 
 ---
 
@@ -204,12 +205,11 @@ grep -c "^>" ecoli_proteome.fasta
 ```
 
 **Salida esperada:**
-
 ```
 4531
 ```
 
-**Explicación:** `^>` es una expresión regular que significa "líneas que empiezan con `>`". Como cada proteína FASTA empieza con `>`, contar esas líneas equivale a contar proteínas. **4,391 proteínas anotadas en menos de 1 segundo.**
+**Explicación:** `grep` busca patrones dentro de un archivo línea por línea. `^>` es una **expresión regular** donde `^` (caret) significa "inicio de línea" y `>` es el carácter que empieza todo header FASTA. Combinados, `^>` selecciona únicamente las líneas que empiezan con `>`, es decir, exactamente una por proteína. El flag `-c` **cuenta** cuántas hay. **4,531 proteínas contadas en menos de 1 segundo.**
 
 ---
 
@@ -220,12 +220,11 @@ grep -c "ribosomal" ecoli_proteome.fasta
 ```
 
 **Salida esperada:**
-
 ```
 ~70
 ```
 
-**Explicación:** `grep -c` cuenta cuántas líneas contienen la palabra "ribosomal". Como solo los headers contienen palabras anotadas, esto cuenta las proteínas anotadas como ribosomales. **Análisis funcional en miles de proteínas en menos de 1 segundo.**
+**Explicación:** `grep -c "ribosomal"` recorre todas las líneas del archivo buscando la palabra `ribosomal` y cuenta cuántas líneas la contienen. Como solo los headers FASTA contienen palabras anotadas (las líneas de secuencia solo tienen letras de aminoácidos), esto cuenta efectivamente cuántas proteínas están anotadas como ribosomales. Sin el flag `-c`, `grep "ribosomal"` imprimiría todos los headers encontrados. **Análisis funcional en miles de proteínas en menos de 1 segundo.**
 
 ---
 
@@ -236,7 +235,6 @@ grep ">" ecoli_proteome.fasta | grep -i "DNA polymerase"
 ```
 
 **Salida esperada:**
-
 ```
 >sp|P00582|DPO1_ECOLI DNA polymerase I OS=Escherichia coli (strain K12) OX=83333 GN=polA PE=1 SV=1
 >sp|P03007|DPO3E_ECOLI DNA polymerase III subunit epsilon OS=Escherichia coli (strain K12) OX=83333 GN=dnaQ PE=1 SV=1
@@ -251,19 +249,26 @@ grep ">" ecoli_proteome.fasta | grep -i "DNA polymerase"
 >sp|P21189|DPO2_ECOLI DNA polymerase II OS=Escherichia coli (strain K12) OX=83333 GN=polB PE=1 SV=2
 ```
 
-**Explicación:** Primer `grep ">"` filtra solo los headers (líneas que contienen `>`). Segundo `grep -i "DNA polymerase"` busca el término sin distinguir mayúsculas/minúsculas. Útil para identificar genes de interés en bases de datos.
+**Explicación:** Este comando usa **dos `grep` encadenados con pipe `|`**:
+- **Primer `grep ">"`:** busca/filtra solo las líneas que contienen `>`, es decir, únicamente los headers — descartando todas las líneas de secuencia.
+- **Pipe `|`:** envía esos headers al segundo `grep`.
+- **Segundo `grep -i "DNA polymerase"`:** busca el término dentro de los headers. El flag `-i` ignora mayúsculas y minúsculas (*case insensitive*), por lo que encontraría tanto `DNA polymerase` como `dna polymerase` o `Dna Polymerase`.
+
+> Este patrón de encadenar `grep` es fundamental en bioinformática para filtrar bases de datos proteómicas o genómicas por función, nombre o familia.
 
 ---
 
-### COMANDO 5 — Extraer la secuencia COMPLETA de UNA proteína específica y guardar la secuencia extraida
+### COMANDO 5 — Extraer la secuencia COMPLETA de UNA proteína específica
 
 ```bash
+# Ver en pantalla
 awk '/^>/{p=0} /DPO1_ECOLI/{p=1} p' ecoli_proteome.fasta | head -10
+
+# Guardar en archivo
 awk '/^>/{p=0} /DPO1_ECOLI/{p=1} p' ecoli_proteome.fasta > DPO1_ECOLI_protein.fasta
 ```
 
 **Salida esperada:**
-
 ```
 >sp|P00582|DPO1_ECOLI DNA polymerase I OS=Escherichia coli (strain K12) OX=83333 GN=polA PE=1 SV=1
 MVQIPQNPLILVDGSSYLYRAYHAFPPLTNSAGEPTGAMYGVLNMLRSLIMQYKPTHAAV
@@ -276,29 +281,36 @@ LDNISANLVGLSFAIEPGVAAYIPVAHDYLDAPDQISRERALELLKPLLEDEKALKVGQN
 LKYDRGILANYGIELRGIAFDTMLESYILNSVAGRHDMDSLAERWLKHKTITFEEIAGKG
 KNQLTFNQIALEEAGRYAAEDADVTLQLHLKMWPDLQKHKGPLNVFENIEMPLVPVLSRI
 ```
+**Explicación:** `awk` procesa el archivo línea por línea usando una variable `p` como **interruptor (flag)** que puede estar apagado (`p=0`) o encendido (`p=1`). En cada línea hace tres preguntas en orden:
 
-**Explicación:** El comando `awk` usa una variable `p` (flag) que activa la impresión solo cuando encuentra el patrón deseado. Cuando llega a un nuevo header (`/^>/`), apaga el flag (`p=0`). Cuando encuentra el header de la proteína buscada (`DPO1_ECOLI`), lo enciende (`p=1`). Mientras el flag esté encendido, imprime las líneas.
+- `/^>/` — ¿esta línea empieza con `>`? Si sí, **apaga** el flag (`p=0`): significa que llegamos a una proteína que no nos interesa, deja de imprimir.
+- `/DPO1_ECOLI/` — ¿esta línea contiene `DPO1_ECOLI`? Si sí, **enciende** el flag (`p=1`): encontramos la proteína buscada, empieza a imprimir.
+- `p` — ¿el flag está encendido? Si sí, **imprime** la línea actual.
 
-**Aplicaciones reales:** análisis de homología, diseño de primers, punto de partida para experimentos.
+De esta forma extrae el header y toda la secuencia de aminoácidos hasta encontrar el siguiente `>`, momento en que el flag se apaga automáticamente. Es como buscar un capítulo en un libro: ignoras todo hasta encontrar el título que buscas, lees hasta el siguiente título, y paras.
+
+- El símbolo `>` redirige la salida a un archivo nuevo (`DPO1_ECOLI_protein.fasta`) listo para usar en análisis posteriores como alineamientos, docking molecular o diseño de primers.
 
 ---
 
 ### COMANDO 6 — Extraer UN GRUPO de proteínas
 
 ```bash
+# Extraer todas las polimerasas
 awk '/^>/{p=0} /DNA polymerase/{p=1} p' ecoli_proteome.fasta > polimerasas.fasta
+
+# Verificar cuántas se extrajeron
 grep -c "^>" polimerasas.fasta
 ```
 
 **Salida esperada:**
-
 ```
 5
 ```
 
-**Explicación:** Funciona igual que el Comando 5, pero captura **todas** las proteínas que contengan "DNA polymerase" en su header (no solo una). El símbolo `>` redirige el resultado a un archivo nuevo (`polimerasas.fasta`). Luego se cuenta cuántas se extrajeron.
+**Explicación:** Funciona con la misma lógica de flag que el Comando 5, pero en lugar de buscar un ID exacto busca el término `DNA polymerase` — capturando **todas** las proteínas que lo contengan en su header. El resultado se redirige con `>` a un archivo nuevo `polimerasas.fasta`. Luego `grep -c "^>"` verifica cuántas proteínas fueron extraídas contando los headers del archivo resultante.
 
-**Útil para:** filtrar por familias funcionales, agrupar proteínas relacionadas, preparar datasets para análisis posteriores.
+**Útil para:** filtrar por familias funcionales, agrupar proteínas relacionadas, preparar subconjuntos de datos para análisis posteriores como alineamiento múltiple (MUSCLE, MAFFT) o construcción de árboles filogenéticos.
 
 ---
 
