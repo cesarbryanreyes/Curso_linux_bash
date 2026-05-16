@@ -45,10 +45,10 @@ ls -lh
 
 ---
 
-### COMANDO 1 — Ver dentro del archivo comprimido
+### COMANDO 1 — Ver dentro del archivo descomprimido
 
 ```bash
-zcat sub_SRR2589044_1.fastq.gz | head -8
+head -8 sub/SRR2589044_1.trim.sub.fastq
 ```
 
 **Salida esperada:**
