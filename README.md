@@ -34,8 +34,8 @@ Este repositorio contiene los **comandos esenciales** del demo en vivo del webin
 # Desde mi directorio de trabajo Cursos_bioinformatica
 mkdir -p webinar_linux_bash/data/raw_reads
 cd webinar_linux_bash/data/raw_reads
-wget https://ndownloader.figshare.com/files/14418248 -O sub.tar.gz
-tar -xvzf sub.tar.gz
+ wget https://github.com/cesarbryanreyes/Curso_linux_bash/releases/download/v1.0/sub.tar
+tar -xvf sub.tar
 ls -lh
 ```
 
