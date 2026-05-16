@@ -1,51 +1,39 @@
-# 🧬 Webinar: Primeros pasos en bioinformática con Linux y Bash
+# Webinar: Primeros pasos en bioinformática con Linux y Bash
 
 > Repositorio público de referencia del webinar gratuito del **sábado 16 de mayo de 2026** organizado por el **Centro de Especialización Multidisciplinario (CEM)**.
 
-📅 **Fecha del webinar:** sábado 16 de mayo de 2026 · 5:00 PM (hora de Lima)
-🖥️ **Plataforma:** Microsoft Teams
-⏱️ **Duración:** 40 minutos
-👨‍🏫 **Docente:** Mg(c). César Bryan Reyes Moreno · [UNMSM](https://www.unmsm.edu.pe/)
-🔗 **ORCID:** [0000-0001-7346-2917](https://orcid.org/0000-0001-7346-2917)
+**Fecha del webinar:** sábado 16 de mayo de 2026 · 5:00 PM (hora de Lima)
+**Plataforma:** Microsoft Teams
+**Docente:** Mg(c). César Bryan Reyes Moreno · [UNMSM](https://www.unmsm.edu.pe/)
+**ORCID:** [0000-0001-7346-2917](https://orcid.org/0000-0001-7346-2917)
 
 ---
 
-## 📌 ¿Qué encontrarás aquí?
+## ¿Qué encontrarás aquí?
 
 Este repositorio contiene los **10 comandos completos** del demo en vivo del webinar, listos para que los repliques en tu propia computadora. Incluye instrucciones de instalación, descarga de datos y los comandos paso a paso.
 
-> 💡 **Importante:** este repositorio NO es un curso. Es una guía de referencia rápida del demo del webinar. Si quieres aprender los fundamentos desde cero, inscríbete al curso completo **CEM-BIO-101** (inicio: 13 de junio de 2026).
-
----
-
-## 🚀 ¿Por qué Linux y Bash?
-
-Hoy, casi cualquier laboratorio de investigación, hospital o empresa biotecnológica trabaja con datos que ya no funcionan adecuadamente en Excel: archivos de secuenciación genómica de cientos de megabytes o gigabytes, resultados de microscopía cuantitativa o registros clínicos masivos. **Esos datos se procesan en Linux, desde la terminal.**
-
-Aprender Linux y Bash te convierte en un **profesional autónomo** que puede analizar sus propios datos sin depender siempre del bioinformático del equipo.
+> **Importante:** este repositorio NO es un curso. Es una guía de referencia rápida del demo del webinar. Si quieres aprender los fundamentos desde cero, inscríbete al curso completo **Fundamentos de Linux y Bash Scripting para Bioinformática** (inicio: 13 de junio de 2026).
 
 ---
 
 ## 🛠️ Antes de empezar: requisitos técnicos
 
 ### Sistema operativo
-- **Windows 10/11:** instalar [WSL2 con Ubuntu](https://learn.microsoft.com/es-es/windows/wsl/install)
+- **Windows 10/11:** instalar [WSL2 con Ubuntu]
 - **macOS:** usar la terminal nativa (Terminal.app) o iTerm2
-- **Linux:** usar tu terminal habitual
-
-### Herramientas necesarias
-- `zcat`, `wc`, `awk`, `grep`, `head`, `cat`, `echo` (preinstaladas en Linux/macOS)
-- `wget` para descargar archivos (en macOS: `brew install wget`)
+- **Linux:** usar la terminal nativa
 
 ---
 
-## 📦 CASO I: Datos crudos de secuenciación (FASTQ)
+## CASO I: Datos crudos de secuenciación (FASTQ)
 
 ### Descarga del archivo
 
 ```bash
-mkdir -p ~/webinar_demo/data/raw_reads
-cd ~/webinar_demo/data/raw_reads
+# Desde mi directorio de trabajo Cursos_bioinformatica
+mkdir -p webinar_linux_bash/data/raw_reads
+cd webinar_linux_bash/data/raw_reads
 wget https://ndownloader.figshare.com/files/14418248 -O sub.tar.gz
 tar -xvzf sub.tar.gz
 ls -lh
