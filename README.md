@@ -87,16 +87,27 @@ Total: 1108029
 ### COMANDO 3 — Largo promedio de las lecturas
 
 ```bash
-zcat sub_SRR2589044_1.fastq.gz | awk 'NR%4==2 {sum+=length($0); n++} END {print "Largo promedio:", sum/n, "bp"}'
+# Paso 1 — Extraer solo las líneas de secuencia
+cat SRR2589044_1.trim.sub.fastq | awk 'NR%4==2' > solo_secuencias.txt
+
+# Paso 2 — Calcular el largo de cada secuencia
+awk '{print length($0)}' solo_secuencias.txt > largos.txt
+
+# Paso 3 — Calcular el promedio
+awk '{sum+=$1; n++} END {print "Largo promedio:", sum/n, "bp"}' largos.txt
 ```
 
 **Salida esperada:**
 
 ```
-Largo promedio: 150 bp
+Largo promedio: 139.105 bp
 ```
+**Explicación:**
+- **Paso 1:** `cat` lee el archivo y lo envía por el pipe `|` a `awk`, una herramienta que procesa texto línea por línea permitiendo filtrar, calcular e imprimir resultados. `NR%4==2` usa el operador módulo `%` para seleccionar únicamente las líneas de secuencia — como cada read FASTQ ocupa exactamente 4 líneas (encabezado, secuencia, `+`, calidad), el residuo de dividir el número de línea `NR` entre `4` siempre es `2` cuando cae en una línea de secuencia. El resultado se guarda en `solo_secuencias.txt`.
+- **Paso 2:** `awk` recorre cada línea de `solo_secuencias.txt`, `length($0)` mide el número de caracteres de cada secuencia y `print` imprime ese número. El resultado — un largo por línea — se guarda en `largos.txt`.
+- **Paso 3:** `awk` recorre cada línea de `largos.txt` acumulando el valor de cada línea en `sum` y contando cuántas líneas hay en `n`. Al finalizar todas las líneas (`END`), `print` imprime el promedio dividiendo `sum` entre `n`, expresado en pares de bases (bp).
 
-**Explicación:** `awk 'NR%4==2'` toma solo las líneas de secuencia (cada cuarta línea empezando desde la 2). `length($0)` calcula el largo de cada secuencia. Acumula la suma y divide entre el total al final.
+> **Tip:** Puedes inspeccionar los archivos intermedios con `head solo_secuencias.txt` y `head largos.txt` para entender qué hace cada paso.
 
 ---
 
