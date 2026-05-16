@@ -71,7 +71,7 @@ AAFFFKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK...
 ### COMANDO 2 — Contar lecturas
 
 ```bash
-echo "Total: $(($(zcat sub_SRR2589044_1.fastq.gz | wc -l) / 4))"
+echo "$(($(cat SRR2589044_1.trim.sub.fastq | wc -l) / 4))"
 ```
 
 **Salida esperada:**
@@ -80,11 +80,11 @@ echo "Total: $(($(zcat sub_SRR2589044_1.fastq.gz | wc -l) / 4))"
 Total: 1108029
 ```
 
-**Explicación:** `wc -l` cuenta el número total de líneas. Dividir entre 4 da el número de lecturas (porque cada lectura ocupa 4 líneas). `$(( ... ))` hace la operación matemática en Bash. **Un millón ciento ocho mil veintinueve secuencias en menos de 5 segundos.**
+**Explicación:**  `cat` lee el archivo y lo envía por el pipe `|` a  `wc -l` que cuenta el número total de líneas. Dividir entre 4 da el número de lecturas (porque cada lectura ocupa 4 líneas). `$( ... )` ejecuta un comando y captura su salida, mientras que `$(( ... ))` hace la operación matemática en Bash. Finalmente, `echo` imprime el resultado. **Un millón ciento ocho mil veintinueve secuencias en menos de 5 segundos.**
 
 ---
 
-### COMANDO 3 — Largo promedio de las lecturas (🟡 OPCIONAL)
+### COMANDO 3 — Largo promedio de las lecturas
 
 ```bash
 zcat sub_SRR2589044_1.fastq.gz | awk 'NR%4==2 {sum+=length($0); n++} END {print "Largo promedio:", sum/n, "bp"}'
@@ -100,7 +100,7 @@ Largo promedio: 150 bp
 
 ---
 
-### COMANDO 4 — Detectar contaminación de adaptador Illumina (⭐ CLÍMAX 2)
+### COMANDO 4 — Detectar contaminación de adaptador Illumina
 
 ```bash
 zcat sub_SRR2589044_1.fastq.gz | awk 'NR%4==2' | grep -c "AGATCGGAAGAG"
