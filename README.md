@@ -110,44 +110,45 @@ Largo promedio: 139.105 bp
 > **Tip:** Puedes inspeccionar los archivos intermedios con `head solo_secuencias.txt` y `head largos.txt` para entender qué hace cada paso.
 
 ---
-
 ### COMANDO 4 — Detectar contaminación de adaptador Illumina
 
 ```bash
-zcat sub_SRR2589044_1.fastq.gz | awk 'NR%4==2' | grep -c "AGATCGGAAGAG"
+### Ejemplo 1
+# Paso 1 — Extraer solo las líneas de secuencia
+cat SRR2589044_1.trim.sub.fastq | awk 'NR%4==2' > solo_secuencias.txt
+
+# Paso 2 — Contar lecturas con adaptador
+grep -c "AGATCGGAAGAG" solo_secuencias.txt
+
+### Ejemplo 2
+# Paso 1 — Extraer solo las líneas de secuencia
+cat SRR33374132_2_extra.fastq | awk 'NR%4==2' > solo_secuencias_ejemplo2.txt
+
+# Paso 2 — Contar lecturas con adaptador
+## Adaptador TruSeq (el más común - read 1)
+grep -c "AGATCGGAAGAG" solo_secuencias_ejemplo2.txt
+
+## Adaptador TruSeq read 2
+grep -c "AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT" solo_secuencias_ejemplo2.txt
+
+## Nextera
+grep -c "CTGTCTCTTATACACATCT" solo_secuencias_ejemplo2.txt
+
+## Small RNA
+grep -c "ATGGAATTCTCGGGTGCCAAGG" solo_secuencias_ejemplo2.txt
 ```
 
 **Salida esperada:**
-
 ```
-~180000
-```
-
-**Explicación:** `AGATCGGAAGAG` es la secuencia de inicio del adaptador estándar de Illumina. `grep -c` cuenta cuántas lecturas la contienen. Esto detecta contaminación de adaptador que necesita ser removida antes del análisis (~16% de las lecturas en este caso).
-
-**Esto es exactamente lo que detecta FastQC**, la herramienta que aprenderás a usar en el Módulo 4 del curso CEM-BIO-101.
-
----
-
-### COMANDO 5 — Generar mini-reporte de QC
-
-```bash
-echo "REPORTE DE QC RÁPIDO" > resumen.txt
-echo "Total lecturas: $(($(zcat sub_SRR2589044_1.fastq.gz | wc -l) / 4))" >> resumen.txt
-echo "Adaptador presente: $(zcat sub_SRR2589044_1.fastq.gz | awk 'NR%4==2' | grep -c 'AGATCGGAAGAG')" >> resumen.txt
-cat resumen.txt
+0 para ejemplo 1 
+27 para ejemplo 2
 ```
 
-**Salida esperada:**
+**Explicación:**
+- **Paso 1:** `cat` lee el archivo y lo envía a `awk`, que con `NR%4==2` extrae únicamente las líneas de secuencia y las guarda en `solo_secuencias.txt`.
+- **Paso 2:** `grep` busca la cadena `AGATCGGAAGAG` dentro de cada línea de `solo_secuencias.txt`. `AGATCGGAAGAG` es la secuencia de inicio del adaptador estándar de Illumina. El flag `-c` en lugar de imprimir las líneas que coinciden, cuenta cuántas lecturas la contienen — detectando así contaminación de adaptador que debe ser removida antes del análisis (~16% de las lecturas en este caso).
 
-```
-REPORTE DE QC RÁPIDO
-Total lecturas: 1108029
-Adaptador presente: ~180000
-```
-
-**Explicación:** El símbolo `>` redirige la salida a un archivo (sobrescribiendo). `>>` añade al final del archivo (sin sobrescribir). `cat` muestra el contenido del archivo. **Esto es lo que el Módulo 4 del curso enseña a automatizar con FastQC.**
-
+> **Esto es exactamente lo que detecta FastQC**, la herramienta que aprenderás en el Curso.
 ---
 
 ## 📦 CASO II: Proteoma anotado (MULTIFASTA)
