@@ -34,21 +34,21 @@ Este repositorio contiene los **comandos esenciales** del demo en vivo del webin
 # Desde mi directorio de trabajo Cursos_bioinformatica
 mkdir -p webinar_linux_bash/data/raw_reads
 cd webinar_linux_bash/data/raw_reads
- wget https://github.com/cesarbryanreyes/Curso_linux_bash/releases/download/v1.0/sub.tar
+wget https://github.com/cesarbryanreyes/Curso_linux_bash/releases/download/v1.0/sub.tar
 tar -xvf sub.tar
 ls -lh
 ```
 
-**Resultado esperado:** archivo `sub_SRR2589044_1.fastq.gz` de ~109 MB.
+**Resultado esperado:** archivo `SRR2589044_1.trim.sub.fastq` de 58 MB.
 
-**Origen:** Experimento de Richard Lenski sobre evolución a largo plazo de *Escherichia coli*. Datos descargados desde una base de datos pública de secuenciación.
+**Origen:** Experimento de Richard Lenski sobre evolución a largo plazo de *Escherichia coli*.
 
 ---
 
 ### COMANDO 1 — Ver dentro del archivo descomprimido
 
 ```bash
-head -8 sub/SRR2589044_1.trim.sub.fastq
+head -8 SRR2589044_1.trim.sub.fastq
 ```
 
 **Salida esperada:**
