@@ -97,7 +97,7 @@ grep -v ">" GCF_000005845.2_ASM584v2_genomic.fna | tr -d '\n' | wc -c
 
 ---
 
-## ✅ Checklist del M1
+## Checklist del M1
 
 - [ ] Genoma descargado y descomprimido (`.fna`).
 - [ ] Cabecera verificada (`NC_000913.3 ... MG1655`).
