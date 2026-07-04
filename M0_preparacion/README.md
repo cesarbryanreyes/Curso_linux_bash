@@ -101,7 +101,7 @@ echo "$(($(cat SRR2589044_1.trim.sub.fastq | wc -l) / 4))"
 
 ---
 
-## ✅ Checklist del M0
+## Checklist del M0
 
 - [ ] Carpeta de trabajo creada (`data/ results/ scripts/ doc/`).
 - [ ] `sub.tar` descargado y descomprimido.
