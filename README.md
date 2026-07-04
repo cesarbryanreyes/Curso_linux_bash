@@ -9,7 +9,7 @@
 
 ---
 
-## 🚀 Empieza aquí
+## Empieza aquí
 
 1. Ten tu entorno listo (WSL2 en Windows, o terminal nativa en macOS/Linux). Ver Módulo 0.
 2. Descarga el paquete de datos de cada módulo siguiendo las guías de abajo.
@@ -19,7 +19,7 @@
 
 ---
 
-## 📦 Datos del curso
+## Datos del curso
 
 Todos los datos provienen de bases públicas (NCBI, Ensembl/GENCODE, UniProt, SRA/ENA) y están documentados en [`datos/README.md`](datos/README.md).
 
@@ -32,7 +32,7 @@ Todos los datos provienen de bases públicas (NCBI, Ensembl/GENCODE, UniProt, SR
 
 ---
 
-## 🗂️ Estructura de este repositorio
+## Estructura de este repositorio
 
 ```
 Curso_linux_bash/
@@ -46,7 +46,7 @@ Curso_linux_bash/
 
 ---
 
-## 📁 ¿Dónde se guardan los datos en tu computadora?
+## ¿Dónde se guardan los datos en tu computadora?
 
 Los datos **no viven en este repositorio** (son pesados). Tú los descargas a tu carpeta de trabajo local, con esta estructura recomendada (Noble, 2009):
 
@@ -60,13 +60,13 @@ Los datos **no viven en este repositorio** (son pesados). Tú los descargas a tu
 
 ---
 
-## 📝 Tu bitácora (obligatoria como guía de referencia)
+## Tu bitácora (obligatoria como guía de referencia)
 
 Cada estudiante mantiene un **repositorio de bitácora** propio en GitHub, escrito en Markdown. Documenta *qué comando usaste, qué hace, qué te costó y qué pregunta te queda*. Usa las plantillas de [`plantillas_estudiante/`](plantillas_estudiante/) para empezar.
 
 ---
 
-## 📚 Bibliografía base
+## Bibliografía base
 
 - Perkel, J. M. (2021). *Five reasons why researchers should learn to love the command line.* Nature.
 - Brandies & Hogg (2021). *Ten simple rules for getting started with command-line bioinformatics.* PLoS Comp Biol.
