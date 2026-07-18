@@ -55,7 +55,7 @@ $ ./scripts/saludo.sh
 bash: ./scripts/saludo.sh: Permiso denegado
 ```
 
-> ❓ **¿Por qué pasa esto?** Crear un archivo (Tema 1.4) no es lo mismo que darle permiso para ejecutarse. Aunque el contenido sea código válido, Linux no lo va a correr hasta que tú, explícitamente, le des permiso de ejecución.
+> **¿Por qué pasa esto?** Crear un archivo (Tema 1.4) no es lo mismo que darle permiso para ejecutarse. Aunque el contenido sea código válido, Linux no lo va a correr hasta que tú, explícitamente, le des permiso de ejecución.
 
 ---
 
@@ -89,7 +89,7 @@ $ ls -l scripts/saludo.sh
 
 r = read (leer) · w = write (escribir) · x = execute (ejecutar). Mnemónico: **P-G-O** (Propietario-Grupo-Otros).
 
-> 🔍 Ninguna de las tres posiciones tiene `x` — por eso `scripts/saludo.sh` no se ejecuta todavía.
+> Ninguna de las tres posiciones tiene `x` — por eso `scripts/saludo.sh` no se ejecuta todavía.
 
 ### ¿Por qué "cesar" aparece dos veces?
 
@@ -117,13 +117,13 @@ Columna 3 (Propietario) y columna 4 (Grupo) muestran "cesar" en este ejemplo, pe
 
 "Directorio" y "carpeta" se refieren a lo mismo en la práctica, pero "directorio" es el término correcto en la terminal; "carpeta" es su representación gráfica.
 
-> 🧬 **Principio Unix/Linux — "todo es un archivo":** un directorio no es un contenedor físico: es un archivo especial que guarda una tabla con los nombres de lo que "vive" dentro de él y la dirección en disco (inodo) de cada uno. Un archivo regular guarda el contenido que tú escribes; un archivo de directorio guarda la lista de archivos que contiene y dónde encontrarlos. Por eso comandos como `rm`, `ls` o `cp` simplemente manipulan archivos en ambos casos, solo que con comportamientos distintos según el tipo (el carácter `d` al inicio de `ls -l`).
+> **Principio Unix/Linux — "todo es un archivo":** un directorio no es un contenedor físico: es un archivo especial que guarda una tabla con los nombres de lo que "vive" dentro de él y la dirección en disco (inodo) de cada uno. Un archivo regular guarda el contenido que tú escribes; un archivo de directorio guarda la lista de archivos que contiene y dónde encontrarlos. Por eso comandos como `rm`, `ls` o `cp` simplemente manipulan archivos en ambos casos, solo que con comportamientos distintos según el tipo (el carácter `d` al inicio de `ls -l`).
 
 ---
 
 ## 4. chmod +x — activar la ejecución (forma simbólica)
 
-> 🔬 **Analogía:** un proceso es como una reacción enzimática activa — la enzima solo cataliza si tiene la conformación correcta. `chmod +x` le da a tu script esa "conformación activa".
+> **Analogía:** un proceso es como una reacción enzimática activa — la enzima solo cataliza si tiene la conformación correcta. `chmod +x` le da a tu script esa "conformación activa".
 
 ```bash
 $ chmod +x scripts/saludo.sh
@@ -163,7 +163,7 @@ $ ./scripts/saludo.sh
 → Hola, soy tu primer script
 ```
 
-> 🧭 **¿Recuerdas $PATH del Tema 1.1?** Comandos como `ls` o `cd` funcionan sin `./` porque viven en carpetas listadas en `$PATH` — el inventario oficial de reactivos del laboratorio. Tu script vive en tu propia carpeta, que NO está en ese inventario. El `./` le dice a Bash: "busca aquí mismo, en el directorio actual".
+> **¿Recuerdas $PATH del Tema 1.1?** Comandos como `ls` o `cd` funcionan sin `./` porque viven en carpetas listadas en `$PATH` — el inventario oficial de reactivos del laboratorio. Tu script vive en tu propia carpeta, que NO está en ese inventario. El `./` le dice a Bash: "busca aquí mismo, en el directorio actual".
 
 ---
 
@@ -181,7 +181,7 @@ chmod 755 script.sh      # dar permiso de ejecución (número)
 
 ---
 
-## ✅ Checklist de verificación
+## Checklist de verificación
 
 - [ ] Creaste `scripts/saludo.sh` con `touch`, escribiste su contenido con `nano` y lo verificaste con `cat`
 - [ ] Leíste los permisos de `scripts/saludo.sh` con `ls -l` e identificaste las 7 columnas
@@ -211,29 +211,6 @@ chmod 755 script.sh      # dar permiso de ejecución (número)
 
 ---
 
-## Tu bitácora — preguntas guía
-
-```markdown
-## Tema 1.5 — Permisos de ejecución
-
-Contenido que escribiste en scripts/saludo.sh con nano:
-→
-
-¿Qué mostró ls -l antes de darle permiso de ejecución a tu script?
-→
-
-¿Qué comando usaste para darle permiso: chmod +x o chmod 755?
-→
-
-Salida de tu script al ejecutarlo con ./:
-→
-
-¿Qué fue lo más difícil de esta lección?
-→
-
-¿Qué pregunta te quedó pendiente?
-→
-```
 
 ---
 
