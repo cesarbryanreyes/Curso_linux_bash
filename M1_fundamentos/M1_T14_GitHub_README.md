@@ -7,8 +7,6 @@
 
 En el Tema 1.3 creaste la estructura de tu proyecto y descargaste tu primer archivo real: el genoma de *E. coli* K-12 MG1655, en `data/reference/`. Ahora que existe, vas a aprender a manipularlo — copiarlo, moverlo, eliminarlo cuando corresponda — sin arriesgar nunca el original.
 
-> 🔬 **Recordando el Tema 1.3:** es como el tejido original en histología o la muestra de suelo en ecología: solo haces cortes o alícuotas de la muestra original, nunca alteras el bloque o la muestra primaria. Hoy vas a practicar exactamente eso con `cp`.
-
 ---
 
 ## 1. touch — crear un archivo vacío
