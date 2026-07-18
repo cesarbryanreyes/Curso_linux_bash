@@ -100,7 +100,7 @@ $ history | tail -5
 # tus últimos 5 comandos
 ```
 
-> 💡 ¿Recuerdas que en el Tema 1.2 dijimos que esto se vería en el 1.6? Es ahora.
+> ¿Recuerdas que en el Tema 1.2 dijimos que esto se vería en el 1.6? Es ahora.
 
 ### `|` aplicado a tu genoma
 
@@ -110,7 +110,7 @@ $ grep ">" data/reference/GCF_000005845.2_ASM584v2_genomic.fna | wc -l
 # grep encuentra el header, wc -l cuenta cuántas líneas le llegaron
 ```
 
-> 🔬 **Analogía:** como una vía metabólica, donde el producto de una reacción enzimática es el sustrato de la siguiente. `grep ">"` produce el "metabolito" (las líneas con header). `wc -l` lo consume y produce el conteo. Ninguno de los dos necesita saber cómo funciona el otro — solo pasan el producto por la tubería.
+> **Analogía:** como una vía metabólica, donde el producto de una reacción enzimática es el sustrato de la siguiente. `grep ">"` produce el "metabolito" (las líneas con header). `wc -l` lo consume y produce el conteo. Ninguno de los dos necesita saber cómo funciona el otro — solo pasan el producto por la tubería.
 
 ---
 
@@ -130,7 +130,7 @@ $ grep -v ">" data/reference/GCF_000005845.2_ASM584v2_genomic.fna \
 | 2 | `tr -d '\n'` | Elimina los saltos de línea: une toda la secuencia en un solo bloque |
 | 3 | `wc -c` | Cuenta los caracteres restantes = las bases del genoma |
 
-✅ **4,641,652 bp ≈ 4.64 Mbp** — el mismo número que ya verificaste en el Tema 1.3.
+**4,641,652 bp ≈ 4.64 Mbp** — el mismo número que ya verificaste en el Tema 1.3.
 
 ---
 
@@ -172,27 +172,6 @@ grep -v ">" archivo.fna | tr -d '\n' | wc -c   # contar bases de un FASTA
 
 Usa la plantilla en `plantillas_estudiante/bitacora_T16.md` para documentar tu aprendizaje:
 
-```markdown
-## Tema 1.6 — Flujos estándar, redirecciones y pipes
-
-¿Qué pipe básica construiste tú mismo (con echo, ls o history)?
-→
-
-¿Qué resultado obtuviste al contar las bases de tu genoma con tu propia pipe?
-→
-
-¿Cuál es la diferencia entre > y >>?
-→
-
-¿Para qué usarías 2> en un análisis real de bioinformática?
-→
-
-¿Qué fue lo más difícil de este tema?
-→
-
-¿Qué pregunta te quedó pendiente?
-→
-```
 
 ---
 
