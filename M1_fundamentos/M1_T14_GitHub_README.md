@@ -1,8 +1,5 @@
 # M1 · Tema 1.4 — Creación, Copia, Movimiento y Eliminación de Archivos
 
-> **CEM-BIO-101** · Módulo 1 · Asincrónica · 15 minutos
-> **Nivel:** 0 · **Prerequisito:** Temas 1.1, 1.2 y 1.3
-> **Hito:** Organizar y respaldar el genoma de *E. coli* K-12 MG1655 sin alterar el archivo original
 
 ---
 
