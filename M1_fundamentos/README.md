@@ -18,7 +18,7 @@ Formato de bitácora en todos los temas: **comando → salida esperada → expli
 | 1.3 | Navegación del Sistema de Archivos | 20 min | [M1_T13_GitHub_README.md](M1_T13_GitHub_README.md) | ✅ Disponible |
 | 1.4 | Creación, Copia, Movimiento y Eliminación de Archivos | 15 min | [M1_T14_GitHub_README.md](M1_T14_GitHub_README.md) | ✅ Disponible |
 | 1.5 | Permisos de Ejecución para tus Propios Scripts | 21 min | [M1_T15_GitHub_README.md](M1_T15_GitHub_README.md) | ✅ Disponible |
-| 1.6 | Flujos Estándar, Redirecciones y Pipes | 18 min* | [M1_T16_GitHub_README.md](M1_T16_GitHub_README.md) | ✅ Disponible |
+| 1.6 | Flujos Estándar, Redirecciones y Pipes | 18 min | [M1_T16_GitHub_README.md](M1_T16_GitHub_README.md) | ✅ Disponible |
 
 ---
 
