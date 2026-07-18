@@ -1,6 +1,6 @@
 # M1 · Fundamentos de Linux
 
-> **CEM-BIO-101** · Módulo 1 · 1.5h asincrónica + 1h sincrónica
+> **CEM-BIO-101** · Módulo 1
 > Requisitos previos: ninguno — nivel 0.
 
 Este módulo cubre los fundamentos del sistema operativo Linux y el manejo básico de archivos desde la terminal, usando como caso aplicado la descarga, organización y manipulación del genoma de referencia de *Escherichia coli* K-12 MG1655 desde NCBI.
@@ -18,8 +18,11 @@ Formato de bitácora en todos los temas: **comando → salida esperada → expli
 | 1.3 | Navegación del Sistema de Archivos | 20 min | [M1_T3_Navegacion_Sistema_Archivos.md](M1_T3_Navegacion_Sistema_Archivos.md) | ✅ Disponible |
 | 1.4 | Creación, Copia, Movimiento y Eliminación de Archivos | 15 min | [M1_T4_Manipulacion_Archivos.md](M1_T4_Manipulacion_Archivos.md) | ✅ Disponible |
 | 1.5 | Permisos de Ejecución para tus Propios Scripts | ≈21 min | [M1_T5_Permisos_Ejecucion.md](M1_T5_Permisos_Ejecucion.md) | ✅ Disponible |
+| 1.6 | Flujos Estándar, Redirecciones y Pipes | ≈18 min* | [M1_T16_GitHub_README.md](M1_T16_GitHub_README.md) | ✅ Disponible |
 
-**Duración asincrónica total del módulo:** ≈ 83 minutos (~1h 23min núcleo de contenido).
+*Duración de 1.6 estimada por volumen de contenido — pendiente que confirmes el tiempo real de grabación.
+
+**Duración asincrónica total del módulo:** ≈ 101 minutos (~1h 41min núcleo de contenido).
 
 ---
 
@@ -30,9 +33,10 @@ Cada tema construye sobre el anterior, usando siempre el mismo organismo modelo:
 ```
 1.1 Identidad y $PATH  →  1.2 Sintaxis y ayuda  →  1.3 Navegar + descargar genoma
         →  1.4 Copiar/mover/eliminar sin alterar el original  →  1.5 Ejecutar tu propio script
+        →  1.6 Redirecciones y pipes (cierra el módulo)
 ```
 
-El genoma de *E. coli* K-12 MG1655 (`GCF_000005845.2`, `NC_000913.3`, 4,641,652 bp) se descarga en el Tema 1.3 y se usa como archivo de trabajo en los Temas 1.4 y 1.5.
+El genoma de *E. coli* K-12 MG1655 (`GCF_000005845.2`, `NC_000913.3`, 4,641,652 bp) se descarga en el Tema 1.3 y se usa como archivo de trabajo en los Temas 1.4, 1.5 y 1.6. En el Tema 1.6 se explica finalmente la pipe de 3 comandos (`grep -v ">" | tr -d '\n' | wc -c`) que calculó la longitud del genoma en el Tema 1.3.
 
 ---
 
@@ -47,6 +51,7 @@ Cada tema tiene su propia sección de preguntas guía al final del archivo corre
 | 1.3 | `plantillas_estudiante/bitacora_T13.md` |
 | 1.4 | `plantillas_estudiante/bitacora_T14.md` |
 | 1.5 | `plantillas_estudiante/bitacora_T15.md` |
+| 1.6 | `plantillas_estudiante/bitacora_T16.md` |
 
 Documenta tu aprendizaje siguiendo el patrón: qué comando usé, qué hace, qué me costó, qué pregunta me queda.
 

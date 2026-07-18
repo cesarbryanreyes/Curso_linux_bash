@@ -1,7 +1,7 @@
 # M1 · Tema 1.2 — La Terminal, Shell y Bash
 
-> **CEM-BIO-101** · Módulo 1 · Asincrónica · 15 minutos  
-> **Nivel:** 0 — sin experiencia previa  
+> **CEM-BIO-101** · Módulo 1 · Asincrónica · 15 minutos
+> **Nivel:** 0 — sin experiencia previa
 > **Prerequisito:** Tema 1.1 completado
 
 ---
@@ -10,9 +10,11 @@
 
 - Leer y entender cada parte del **prompt**
 - Escribir comandos con la sintaxis correcta
-- Pedir ayuda con `man`, `--help` y `whatis`
+- Usar Tab y Ctrl+C — los dos atajos de supervivencia, antes de escribir nada
+- Ejecutar tus primeros comandos
 - Usar el historial para no reescribir comandos
-- Usar atajos esenciales: Tab, Ctrl+C, Ctrl+L, Ctrl+R
+- Pedir ayuda con `man`, `--help` y `whatis`
+- Usar el resto de atajos esenciales: Ctrl+L, Ctrl+D, Ctrl+A/E, Ctrl+Z
 - Interpretar el código de salida `$?`
 
 ---
@@ -38,6 +40,21 @@ cesar @ ubuntu : ~ $
 | `#` | Root — administrador total | ⚠ Mucho cuidado · escribe `exit` para salir |
 
 > El prompt cambia automáticamente cuando cambias de carpeta — es el GPS de la terminal.
+
+### Cómo luce en diferentes entornos
+
+```
+Ubuntu en WSL2 (Windows):
+cesar@DESKTOP-XYZ:/mnt/c/Users/cesar$
+
+Ubuntu nativo / macOS:
+cesar@ubuntu:~$
+
+Servidor remoto (SSH):
+cesar@servidor-hpc:/data/proyectos$
+```
+
+> `~` (virgulilla) = tu carpeta personal — el mismo `$HOME`. El cursor parpadeante indica que Linux está LISTO y esperando que escribas.
 
 ---
 
@@ -75,38 +92,108 @@ ls  -lh  /home/cesar
 ✅ ls -lh         → CORRECTO
 ```
 
----
-
-## 3. Tus primeros 6 comandos
+### Ejemplos reales
 
 ```bash
-$ echo "Hola bioinformática"
-Hola bioinformática
-# → Imprime texto en pantalla
-
-$ date
-Sat Jul 11 10:32:15 -05 2026
-# → Fecha y hora del sistema
-
-$ cal
-# → Calendario del mes actual (cal 2026 = año completo)
-
-$ pwd
-/home/cesar
-# → ¿Dónde estoy? Print Working Directory = ruta actual
-
-$ ls
-Desktop  Documents  Downloads  Music  Videos
-# → Lista los archivos de la carpeta actual
-
-$ echo $?
-0
-# → Código de salida del último comando (0 = éxito)
+echo "Hola bioinformática"    # echo = comando, texto entre comillas = argumento
+ls -la ~                      # -l=largo, -a=ocultos, ~=home
+sudo apt update                # sudo = comando, apt update = argumento
 ```
 
 ---
 
-## 4. Cómo pedir ayuda — 3 herramientas integradas
+## 3. Antes de escribir tu primer comando: Tab y Ctrl+C
+
+> ⭐ Aprende estos DOS atajos AHORA, antes de escribir cualquier comando. Los usarás miles de veces.
+
+### Tab — autocompletar
+
+Tab es como la ADN Polimerasa: tú das el cebador (primeras letras) y Linux sintetiza y completa el resto de la secuencia. Si hay ambigüedad (varios archivos), Tab Tab muestra todas las opciones.
+
+```bash
+$ ls /home/ce[Tab]
+$ ls /home/cesar/          ← completado
+
+$ ls ~/Do[Tab][Tab]
+Documents/   Downloads/    ← opciones
+```
+
+> ⭐ Hábito desde hoy: escribe 3-4 letras y presiona Tab. Nunca termines de escribir un nombre a mano. Evita el 90% de errores de escritura.
+
+### Ctrl+C — el botón de pánico
+
+Sirve para DOS situaciones distintas:
+
+**① Detener un proceso que está corriendo** — si un análisis tarda demasiado o algo no responde → Ctrl+C lo detiene inmediatamente. No daña archivos.
+
+**② Escapar de un prompt extraño** — si el prompt cambia a `>` (mayor que), Linux está esperando que cierres algo (comillas, paréntesis). Ctrl+C te devuelve al prompt normal `$`.
+
+```bash
+$ echo "texto sin cerrar
+>                  ← prompt extraño
+^C                 ← Ctrl+C → vuelve a $
+```
+
+---
+
+## 4. Tus primeros comandos — con salida explicada
+
+Ejecútalos ahora mismo en tu terminal:
+
+```bash
+$ echo "Hola bioinformática"
+Hola bioinformática
+# → Imprime texto en pantalla. Las comillas son necesarias si el texto tiene espacios.
+
+$ date
+Sat Jul 11 10:32:15 -05 2026
+# → Fecha y hora del sistema. Muy útil para registrar cuándo ejecutaste un análisis.
+
+$ cal
+July 2026
+Su Mo Tu We Th Fr Sa
+      1  2  3  4
+5  6  7  8  9 10 11
+# → Calendario del mes actual. Sin argumentos = mes actual. 'cal 2026' = año completo.
+
+$ pwd
+/home/cesar
+# → Print Working Directory = ruta completa de dónde estás ahora mismo.
+
+$ ls
+Desktop  Documents  Downloads  Music  Videos
+# → Lista los archivos de la carpeta actual.
+
+$ echo $?
+0
+# → Código de salida del ÚLTIMO comando ejecutado. 0 = éxito (lo vemos a fondo en la sección 7).
+
+$ clear
+(pantalla limpia)
+# → Limpia la pantalla. Atajo equivalente: Ctrl+L. El historial NO se borra.
+```
+
+---
+
+## 5. El historial de comandos
+
+Linux guarda todos tus comandos. Aprende a reutilizarlos — en bioinformática ejecutas comandos muy largos, y el historial te ahorra reescribir pipelines de decenas de caracteres.
+
+```bash
+↑ (flecha arriba)     # comando anterior — el más usado
+↓ (flecha abajo)      # avanzar en el historial
+Ctrl+R                # búsqueda inversa — escribe parte del cmd
+history               # ver lista numerada de todos los comandos
+history | tail -20    # ver solo los últimos 20
+!498                  # ejecutar el comando número 498 del historial
+!!                    # repetir el ÚLTIMO comando ejecutado
+```
+
+> 💡 Truco: `sudo !!` — si un comando falló por falta de sudo, esto lo repite con sudo sin reescribirlo.
+
+---
+
+## 6. Cómo pedir ayuda — 3 herramientas integradas
 
 > 💡 Regla de oro: antes de buscar en Google, pregúntale al propio Linux.
 
@@ -130,58 +217,26 @@ whatis grep        # grep (1) - print lines that match patterns
 | `comando --help` | Quieres ver rápidamente qué opciones tiene |
 | `whatis comando` | No recuerdas para qué sirve exactamente |
 
----
-
-## 5. El historial de comandos
-
-Linux guarda todos tus comandos. Aprende a reutilizarlos:
-
-```bash
-↑ (flecha arriba)     # comando anterior — el más usado
-↓ (flecha abajo)      # avanzar en el historial
-Ctrl+R                # búsqueda inversa — escribe parte del cmd
-history               # ver lista numerada de todos los comandos
-history | tail -20    # ver solo los últimos 20
-!498                  # ejecutar el comando número 498 del historial
-!!                    # repetir el ÚLTIMO comando ejecutado
-```
-
-> 💡 Truco: `sudo !!` — si un comando falló por falta de sudo, esto lo repite con sudo sin reescribirlo.
+> Si `whatis` da error, ejecuta primero `sudo mandb` (genera la base de datos de manuales).
 
 ---
 
-## 6. Atajos de teclado esenciales
+## 7. Atajos de teclado esenciales
 
 | Atajo | ¿Qué hace? |
 |-------|-----------|
-| **Tab** | ⭐ Autocompletar nombres de archivos/carpetas/comandos |
-| **Ctrl+C** | Detener el proceso que está corriendo |
-| **Ctrl+L** | Limpiar la pantalla (el historial no se borra) |
+| **Tab** | ⭐ Autocompletar nombres de archivos/carpetas/comandos (ver sección 3) |
+| **Ctrl+C** | Detener el proceso que está corriendo (ver sección 3) |
+| **Ctrl+L** | Limpiar la pantalla — equivale a `clear` (el historial no se borra) |
 | **Ctrl+D** | Cerrar la terminal (equivale a `exit`) |
 | **Ctrl+R** | Búsqueda inversa en el historial |
 | **Ctrl+A** | Ir al inicio de la línea |
 | **Ctrl+E** | Ir al final de la línea |
 | **Ctrl+Z** | Pausar proceso (`fg` para recuperar, `bg` para segundo plano) |
 
-### Tab — el atajo más importante
-
-```bash
-# Antes de Tab:
-$ ls /home/ce
-
-# Después de Tab:
-$ ls /home/cesar/   ← completado automáticamente
-
-# Tab Tab — ver todas las opciones:
-$ ls ~/Do
-Documents/   Downloads/
-```
-
-> ⭐ Hábito: escribe las primeras 3-4 letras de cualquier nombre y presiona Tab. Siempre.
-
 ---
 
-## 7. El código de salida ($?)
+## 8. El código de salida ($?)
 
 Cada comando termina enviando un número. Es la forma que tiene Linux de decir si algo funcionó o falló.
 
@@ -214,31 +269,36 @@ $ echo $?
 # ── Comandos básicos ───────────────────────────────
 echo "texto"          # imprimir texto en pantalla
 date                  # fecha y hora del sistema
-cal                   # calendario del mes
-pwd                   # ¿dónde estoy? (ruta actual)
-ls                    # listar archivos del directorio actual
+cal                    # calendario del mes
+pwd                    # ¿dónde estoy? (ruta actual)
+ls                     # listar archivos del directorio actual
+clear                  # limpiar la pantalla (= Ctrl+L)
 
-# ── Pedir ayuda ────────────────────────────────────
-man ls                # manual completo (salir: q)
-ls --help             # resumen rápido de opciones
-whatis ls             # descripción en una línea
+# ── Atajos de supervivencia ────────────────────────
+Tab                    # autocompletar (úsalo siempre)
+Ctrl+C                 # detener proceso / escapar de prompt extraño
 
 # ── Historial ──────────────────────────────────────
-history               # lista todos los comandos anteriores
-history | tail -20    # solo los últimos 20
-!498                  # ejecutar número 498 del historial
-!!                    # repetir el último comando
-sudo !!               # repetir el último con sudo
+history                # lista todos los comandos anteriores
+history | tail -20     # solo los últimos 20
+!498                    # ejecutar número 498 del historial
+!!                      # repetir el último comando
+sudo !!                 # repetir el último con sudo
+
+# ── Pedir ayuda ────────────────────────────────────
+man ls                  # manual completo (salir: q)
+ls --help                # resumen rápido de opciones
+whatis ls                 # descripción en una línea
 
 # ── Código de salida ───────────────────────────────
-echo $?               # ver si el último comando tuvo éxito (0) o error
+echo $?                  # ver si el último comando tuvo éxito (0) o error
 
-# ── Atajos de teclado ──────────────────────────────
-Tab                   # autocompletar (úsalo siempre)
-Ctrl+C                # detener proceso
-Ctrl+L                # limpiar pantalla
-Ctrl+R                # buscar en historial
-Ctrl+A / Ctrl+E       # inicio / fin de línea
+# ── Resto de atajos de teclado ─────────────────────
+Ctrl+L                    # limpiar pantalla
+Ctrl+R                    # buscar en historial
+Ctrl+D                    # cerrar terminal
+Ctrl+A / Ctrl+E            # inicio / fin de línea
+Ctrl+Z                     # pausar proceso (fg / bg)
 ```
 
 ---
@@ -250,6 +310,12 @@ Ctrl+A / Ctrl+E       # inicio / fin de línea
 
 ¿Cuáles son las partes de tu prompt?
 → usuario: ___ · máquina: ___ · directorio inicial: ___
+
+¿Qué completó Tab cuando probaste ls /ho[Tab]?
+→
+
+¿En qué situación usaste Ctrl+C?
+→
 
 Ejecuta echo $? después de un comando exitoso y uno fallido:
 → Exitoso: ___ · Fallido: ___
@@ -277,9 +343,9 @@ Ejecuta echo $? después de un comando exitoso y uno fallido:
 | **sintaxis** | La gramática de los comandos: qué va primero, cómo se separa, qué es obligatorio |
 | **opción / flag** | Modificador de un comando, empieza con `-` o `--` |
 | **argumento** | El objeto sobre el que actúa el comando (archivo, carpeta, texto) |
+| **autocompletado** | Función de Tab que completa nombres automáticamente |
 | **man** | Sistema de manuales integrado en Linux |
 | **historial** | Registro de todos los comandos ejecutados, guardado en `~/.bash_history` |
-| **autocompletado** | Función de Tab que completa nombres automáticamente |
 | **código de salida** | Número que indica si un comando tuvo éxito (0) o falló (≠0) |
 | **`$?`** | Variable especial que guarda el código de salida del último comando |
 
