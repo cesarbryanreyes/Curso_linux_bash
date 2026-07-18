@@ -26,13 +26,8 @@ Formato de bitácora en todos los temas: **comando → salida esperada → expli
 
 Cada tema construye sobre el anterior, usando siempre el mismo organismo modelo:
 
-```
-1.1 Identidad y $PATH  →  1.2 Sintaxis y ayuda  →  1.3 Navegar + descargar genoma
-        →  1.4 Copiar/mover/eliminar sin alterar el original  →  1.5 Ejecutar tu propio script
-        →  1.6 Redirecciones y pipes (cierra el módulo)
-```
 
-El genoma de *E. coli* K-12 MG1655 (`GCF_000005845.2`, `NC_000913.3`, 4,641,652 bp) se descarga en el Tema 1.3 y se usa como archivo de trabajo en los Temas 1.4, 1.5 y 1.6. En el Tema 1.6 se explica finalmente la pipe de 3 comandos (`grep -v ">" | tr -d '\n' | wc -c`) que calculó la longitud del genoma en el Tema 1.3.
+El genoma de *E. coli* K-12 MG1655 (`GCF_000005845.2`, `NC_000913.3`, 4,641,652 bp) se descarga en el Tema 1.3 y se usa como archivo de trabajo en los Temas 1.4, 1.5 y 1.6. 
 
 ---
 
