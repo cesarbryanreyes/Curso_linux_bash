@@ -79,14 +79,14 @@ ls  -lh  /home/cesar
 ### ⚠ Reglas que debes memorizar
 
 ```
-❌ ls-lh          → ERROR: falta el espacio
-✅ ls -lh         → CORRECTO
+ls-lh          → ERROR: falta el espacio
+ls -lh         → CORRECTO
 
-❌ LS -lh         → ERROR: LS no existe, ls sí
-✅ ls -lh         → CORRECTO
+LS -lh         → ERROR: LS no existe, ls sí
+ls -lh         → CORRECTO
 
-❌ -lh ls         → ERROR: el comando va primero
-✅ ls -lh         → CORRECTO
+-lh ls         → ERROR: el comando va primero
+ls -lh         → CORRECTO
 ```
 
 ### Ejemplos reales
@@ -101,7 +101,7 @@ sudo apt update                # sudo = comando, apt update = argumento
 
 ## 3. Antes de escribir tu primer comando: Tab y Ctrl+C
 
-> ⭐ Aprende estos DOS atajos AHORA, antes de escribir cualquier comando. Los usarás miles de veces.
+> Aprende estos DOS atajos AHORA, antes de escribir cualquier comando. Los usarás miles de veces.
 
 ### Tab — autocompletar
 
@@ -115,7 +115,7 @@ $ ls ~/Do[Tab][Tab]
 Documents/   Downloads/    ← opciones
 ```
 
-> ⭐ Hábito desde hoy: escribe 3-4 letras y presiona Tab. Nunca termines de escribir un nombre a mano. Evita el 90% de errores de escritura.
+> Hábito desde hoy: escribe 3-4 letras y presiona Tab. Nunca termines de escribir un nombre a mano. Evita el 90% de errores de escritura.
 
 ### Ctrl+C — el botón de pánico
 
@@ -186,13 +186,13 @@ history | tail -20    # ver solo los últimos 20
 !!                    # repetir el ÚLTIMO comando ejecutado
 ```
 
-> 💡 Truco: `sudo !!` — si un comando falló por falta de sudo, esto lo repite con sudo sin reescribirlo.
+> Truco: `sudo !!` — si un comando falló por falta de sudo, esto lo repite con sudo sin reescribirlo.
 
 ---
 
 ## 6. Cómo pedir ayuda — 3 herramientas integradas
 
-> 💡 Regla de oro: antes de buscar en Google, pregúntale al propio Linux.
+> Regla de oro: antes de buscar en Google, pregúntale al propio Linux.
 
 ```bash
 # 1. Manual completo
@@ -222,7 +222,7 @@ whatis grep        # grep (1) - print lines that match patterns
 
 | Atajo | ¿Qué hace? |
 |-------|-----------|
-| **Tab** | ⭐ Autocompletar nombres de archivos/carpetas/comandos (ver sección 3) |
+| **Tab** | Autocompletar nombres de archivos/carpetas/comandos (ver sección 3) |
 | **Ctrl+C** | Detener el proceso que está corriendo (ver sección 3) |
 | **Ctrl+L** | Limpiar la pantalla — equivale a `clear` (el historial no se borra) |
 | **Ctrl+D** | Cerrar la terminal (equivale a `exit`) |
@@ -251,12 +251,12 @@ $ echo $?
 
 | Código | Significado |
 |--------|------------|
-| `0` | ✅ Éxito — todo funcionó |
-| `1` | ❌ Error general |
-| `2` | ❌ Error de sintaxis / argumento incorrecto |
-| `126` | ❌ Sin permisos para ejecutar |
-| `127` | ❌ Comando no encontrado (`command not found`) |
-| `130` | ℹ️ Proceso interrumpido con Ctrl+C |
+| `0` | Éxito — todo funcionó |
+| `1` | Error general |
+| `2` | Error de sintaxis / argumento incorrecto |
+| `126` | Sin permisos para ejecutar |
+| `127` | Comando no encontrado (`command not found`) |
+| `130` | Proceso interrumpido con Ctrl+C |
 
 ---
 
@@ -299,36 +299,6 @@ Ctrl+Z                     # pausar proceso (fg / bg)
 ```
 
 ---
-
-## Tu bitácora — preguntas guía para este tema
-
-```markdown
-## Tema 1.2 — La Terminal, Shell y Bash
-
-¿Cuáles son las partes de tu prompt?
-→ usuario: ___ · máquina: ___ · directorio inicial: ___
-
-¿Qué completó Tab cuando probaste ls /ho[Tab]?
-→
-
-¿En qué situación usaste Ctrl+C?
-→
-
-Ejecuta echo $? después de un comando exitoso y uno fallido:
-→ Exitoso: ___ · Fallido: ___
-
-¿Qué encontraste útil en man ls que no conocías?
-→
-
-¿Cuántos comandos tienes en tu historial? (history | wc -l)
-→
-
-¿Qué fue lo más difícil de este tema?
-→
-
-¿Qué pregunta te quedó pendiente?
-→
-```
 
 ---
 
