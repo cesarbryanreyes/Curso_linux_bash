@@ -87,7 +87,7 @@ $ cd ~                                    # ir a mi home (siempre funciona)
 $ cd -                                    # volver a la carpeta anterior
 ```
 
-> 💡 Si te pierdes: `cd` sin argumentos siempre te lleva a tu home. Luego `pwd` para confirmar.
+> Si te pierdes: `cd` sin argumentos siempre te lleva a tu home. Luego `pwd` para confirmar.
 
 ---
 
@@ -114,11 +114,10 @@ raw_reads/  reference/
 └── doc/                ← notas y documentación
 ```
 
-> ⚠ **Regla de oro:** la carpeta `data/` es solo lectura. Tus análisis leen de `data/` y escriben en `results/`. Si dañas los datos originales, tendrás que descargarlos de nuevo.
+> **Regla de oro:** la carpeta `data/` es solo lectura. Tus análisis leen de `data/` y escriben en `results/`. Si dañas los datos originales, tendrás que descargarlos de nuevo.
 
-> 🔬 Como el tejido original en histología: haces cortes de la muestra, nunca alteras el bloque primario.
 
-> 💡 **Sobre `raw_reads/` y `reference/`:** separar `data/` en subcarpetas por tipo de dato es una extensión práctica de Noble (2009) — mantiene los genomas de referencia y las lecturas de secuenciación crudas claramente diferenciados a medida que el proyecto crece. En este tema solo usarás `reference/`; `raw_reads/` ya trae un FASTQ de ejemplo que trabajaremos en el Módulo 4 (FastQC).
+> **Sobre `raw_reads/` y `reference/`:** separar `data/` en subcarpetas por tipo de dato es una extensión práctica de Noble (2009) — mantiene los genomas de referencia y las lecturas de secuenciación crudas claramente diferenciados a medida que el proyecto crece. En este tema solo usarás `reference/`; `raw_reads/` ya trae un FASTQ de ejemplo que trabajaremos en el Módulo 4 (FastQC).
 
 ---
 
@@ -194,7 +193,7 @@ $ grep -v ">" GCF_000005845.2_ASM584v2_genomic.fna | tr -d '\n' | wc -c
 ```
 4641652
 ```
-→ Pipe de 3 comandos: excluye cabeceras → une todo → cuenta caracteres (bases). Resultado: **4,641,652 bp ≈ 4.64 Mbp** ✅
+→ Pipe de 3 comandos: excluye cabeceras → une todo → cuenta caracteres (bases). Resultado: **4,641,652 bp ≈ 4.64 Mbp**
 
 ---
 
@@ -242,7 +241,7 @@ grep -v ">" fna | tr -d '\n' | wc -c   # contar bases
 
 ---
 
-## ✅ Checklist de verificación
+## Checklist de verificación
 
 - [ ] Estructura del proyecto creada: `~/curso_linux_bash/{data/raw_reads,data/reference,scripts,results,doc}`
 - [ ] Genoma descargado en `data/reference/`: `GCF_000005845.2_ASM584v2_genomic.fna.gz`
