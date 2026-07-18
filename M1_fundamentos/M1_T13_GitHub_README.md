@@ -276,34 +276,6 @@ grep -v ">" fna | tr -d '\n' | wc -c   # contar bases
 
 ---
 
-## Tu bitácora — preguntas guía
-
-```markdown
-## Tema 1.3 — Navegación y Descarga del Genoma
-
-¿Cuál es la ruta absoluta de tu carpeta data/reference/?
-→
-
-Resultado de head -1 en tu genoma descargado:
-→
-
-Resultado de grep -c ">":
-→
-
-Resultado de wc -c:
-→
-
-¿Coincide con 4641652? Sí / No
-
-¿Qué viste al listar data/raw_reads/?
-→
-
-¿Qué fue lo más difícil de navegar el sistema de archivos?
-→
-
-¿Qué pregunta te quedó pendiente?
-→
-```
 
 ---
 
