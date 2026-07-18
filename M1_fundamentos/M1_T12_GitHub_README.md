@@ -1,9 +1,5 @@
 # M1 · Tema 1.2 — La Terminal, Shell y Bash
 
-> **CEM-BIO-101** · Módulo 1 · Asincrónica · 15 minutos
-> **Nivel:** 0 — sin experiencia previa
-> **Prerequisito:** Tema 1.1 completado
-
 ---
 
 ## ¿Qué aprenderás en este tema?
