@@ -20,10 +20,6 @@ Formato de bitácora en todos los temas: **comando → salida esperada → expli
 | 1.5 | Permisos de Ejecución para tus Propios Scripts | 21 min | [M1_T5_Permisos_Ejecucion.md](M1_T5_Permisos_Ejecucion.md) | ✅ Disponible |
 | 1.6 | Flujos Estándar, Redirecciones y Pipes | 18 min | [M1_T16_GitHub_README.md](M1_T16_GitHub_README.md) | ✅ Disponible |
 
-*Duración de 1.6 estimada por volumen de contenido — pendiente que confirmes el tiempo real de grabación.
-
-**Duración asincrónica total del módulo:** ≈ 101 minutos (~1h 41min núcleo de contenido).
-
 ---
 
 ## Hilo conductor del módulo
