@@ -34,7 +34,7 @@ cesar @ ubuntu : ~ $
 | Símbolo | Significa | ¿Qué hacer? |
 |---------|-----------|-------------|
 | `$` | Usuario normal | Trabajar normalmente |
-| `#` | Root — administrador total | ⚠ Mucho cuidado · escribe `exit` para salir |
+| `#` | Root — administrador total | Mucho cuidado · escribe `exit` para salir |
 
 > El prompt cambia automáticamente cuando cambias de carpeta — es el GPS de la terminal.
 
