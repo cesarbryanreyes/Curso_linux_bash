@@ -38,7 +38,7 @@ Para copiar una carpeta completa (con todo su contenido) hace falta la bandera `
 ```bash
 $ cp -r plantillas_estudiante/ backup_plantillas/
 ```
-> ⚠ Sin `-r`, `cp` se niega con el mensaje "omitiendo directorio".
+> Sin `-r`, `cp` se niega con el mensaje "omitiendo directorio".
 
 ---
 
@@ -57,7 +57,7 @@ $ mv results/genoma_backup.fna data/reference/
 
 ## 4. rm y rmdir — eliminar, con cuidado
 
-> ⚠ **Advertencia importante:** a diferencia de arrastrar un archivo a la papelera en Windows o Mac, `rm` en la terminal borra de forma inmediata y permanente. No existe un botón de "deshacer".
+> **Advertencia importante:** a diferencia de arrastrar un archivo a la papelera en Windows o Mac, `rm` en la terminal borra de forma inmediata y permanente. No existe un botón de "deshacer".
 
 ```bash
 $ rm results/copia_prueba.fna
@@ -69,7 +69,7 @@ $ rm -i results/genoma_backup.fna
 $ rmdir carpeta_vacia
 # → solo funciona si la carpeta está vacía
 ```
-> 🔬 Analogía: `rm` es como desechar una muestra en el contenedor de bioseguridad. Una vez que la tiras ahí, no hay marcha atrás. Usa `-i` (interactivo) mientras te familiarizas con el comando — te pide confirmación antes de borrar.
+> Analogía: `rm` es como desechar una muestra en el contenedor de bioseguridad. Una vez que la tiras ahí, no hay marcha atrás. Usa `-i` (interactivo) mientras te familiarizas con el comando — te pide confirmación antes de borrar.
 
 ---
 
@@ -106,7 +106,7 @@ find . -name "*.ext"             # buscar por nombre desde el directorio actual
 
 ---
 
-## ✅ Checklist de verificación
+## Checklist de verificación
 
 - [ ] Creaste `doc/notas_M1.txt` con `touch`
 - [ ] Copiaste el genoma a `results/` con `cp`, sin alterar `data/reference/`
@@ -131,27 +131,6 @@ find . -name "*.ext"             # buscar por nombre desde el directorio actual
 | **comodín (\*)** | Símbolo que representa "cualquier texto" en patrones de búsqueda |
 
 ---
-
-## Tu bitácora — preguntas guía
-
-```markdown
-## Tema 1.4 — Manipulando archivos sin alterar el original
-
-¿Qué comando usaste para respaldar el genoma sin tocar el archivo original?
-→
-
-¿Qué pasó cuando intentaste rmdir sobre una carpeta que no estaba vacía?
-→
-
-Resultado de find . -name "*.fna" en tu proyecto:
-→
-
-¿Qué fue lo más difícil de esta lección?
-→
-
-¿Qué pregunta te quedó pendiente?
-→
-```
 
 ---
 
