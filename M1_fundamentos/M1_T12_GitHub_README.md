@@ -11,7 +11,8 @@
 - Usar el historial para no reescribir comandos
 - Pedir ayuda con `man`, `--help` y `whatis`
 - Usar el resto de atajos esenciales: Ctrl+L, Ctrl+D, Ctrl+A/E, Ctrl+Z
-- Interpretar el código de salida `$?`
+- Entender si un comando tuvo éxito o falló.
+
 
 ---
 
