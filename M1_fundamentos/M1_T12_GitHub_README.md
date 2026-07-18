@@ -76,7 +76,7 @@ ls  -lh  /home/cesar
 # /home/cesar → la carpeta que quiero listar
 ```
 
-### ⚠ Reglas que debes memorizar
+### Reglas que debes memorizar
 
 ```
 ls-lh          → ERROR: falta el espacio
@@ -121,9 +121,9 @@ Documents/   Downloads/    ← opciones
 
 Sirve para DOS situaciones distintas:
 
-**① Detener un proceso que está corriendo** — si un análisis tarda demasiado o algo no responde → Ctrl+C lo detiene inmediatamente. No daña archivos.
+** Detener un proceso que está corriendo** — si un análisis tarda demasiado o algo no responde → Ctrl+C lo detiene inmediatamente. No daña archivos.
 
-**② Escapar de un prompt extraño** — si el prompt cambia a `>` (mayor que), Linux está esperando que cierres algo (comillas, paréntesis). Ctrl+C te devuelve al prompt normal `$`.
+** Escapar de un prompt extraño** — si el prompt cambia a `>` (mayor que), Linux está esperando que cierres algo (comillas, paréntesis). Ctrl+C te devuelve al prompt normal `$`.
 
 ```bash
 $ echo "texto sin cerrar
